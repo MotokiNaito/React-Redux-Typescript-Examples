@@ -9,15 +9,15 @@ interface ChatInterfaceProps {
 }
 
 const ChatInterface: React.SFC<ChatInterfaceProps> = ({ userName, message, updateMessage, sendMessage }) => {
-  function keyPress(e: React.KeyboardEvent<any>) {
+  const keyPress = (e: React.KeyboardEvent<any>) => {
     if (e.key === 'Enter') {
       send();
     }
-  }
+  };
 
-  function send() {
+  const send = () => {
     sendMessage(message);
-  }
+  };
 
   return (
     <div className="chat-interface">
