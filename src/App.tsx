@@ -8,7 +8,7 @@ import { SystemState } from './store/system/types';
 import { updateSession } from './store/system/actions';
 
 import { ChatState } from './store/chat/types';
-import { sendMessage } from './store/chat/actions';
+import { sendMessage, deleteMessage } from './store/chat/actions';
 
 import ChatHistory from './ChatHistory';
 import ChatInterface from './ChatInterface';
@@ -18,6 +18,7 @@ import { thunkSendMessage } from './thunks';
 interface AppProps {
   sendMessage: typeof sendMessage;
   updateSession: typeof updateSession;
+  deleteMessage: typeof deleteMessage;
   chat: ChatState;
   system: SystemState;
   thunkSendMessage: any;
@@ -61,7 +62,7 @@ class App extends React.Component<AppProps> {
   render() {
     return (
       <div className="parent">
-        <ChatHistory messages={this.props.chat.messages} />
+        <ChatHistory messages={this.props.chat.messages} deleteMessage={this.props.deleteMessage} />
         <ChatInterface userName={this.props.system.userName} message={this.state.message} updateMessage={this.updateMessage} sendMessage={this.sendMessage} />
       </div>
     );
@@ -73,4 +74,4 @@ const mapStateToProps = (state: AppState) => ({
   chat: state.chat
 });
 
-export default connect(mapStateToProps, { sendMessage, updateSession, thunkSendMessage })(App);
+export default connect(mapStateToProps, { sendMessage, deleteMessage, updateSession, thunkSendMessage })(App);
